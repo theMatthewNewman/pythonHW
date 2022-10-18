@@ -38,7 +38,6 @@ class convert:
                     line[i] = 1
                 else:
                     line[i] = 0
-
             arr[row][col] = line[2:]
         return(arr)
 
@@ -47,7 +46,6 @@ class convert:
         output.write("cell,E,W,N,S")
         for j in range(dim[1]):
             for i in range(dim[0]):
-                # Writing data in proper formatting
                 output.write('\n"({}, {})",{},{},{},{}'.format((i+1),(j+1),dic[i][j][0],dic[i][j][1],dic[i][j][2],dic[i][j][3]))
 
 if __name__=="__main__":
