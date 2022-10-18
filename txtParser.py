@@ -48,16 +48,10 @@ class convert:
         for j in range(dim[1]):
             for i in range(dim[0]):
                 # Writing data in proper formatting
-                output.write('\n"({}, {})",{},{},{},{}'.format((i+1),(j+1),dic[i][j][0],dic[i][j][1],dic[i][j][2],dic[i][j][3]))        
-
-    def createMaze(self, outfile):
-        # maze created based the self.csvfile
-        m = maze()
-        m.CreateMaze(loadMaze=outfile)
-        # displace the maze based the created maze
-        m.run()
- 
+                output.write('\n"({}, {})",{},{},{},{}'.format((i+1),(j+1),dic[i][j][0],dic[i][j][1],dic[i][j][2],dic[i][j][3]))
 
 if __name__=="__main__":
     a = convert('inputfile3.txt','tmp.csv')
-    a.createMaze('tmp.csv')
+    m = maze()
+    m.CreateMaze(loadMaze='tmp.csv')
+    m.run()
