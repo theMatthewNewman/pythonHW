@@ -13,6 +13,7 @@ class mazeSolver:
         
         return(m)
     
+    # the main function this writes a output file to the specified location
     def solveMaze(self):
         m = self.createMaze()
         path = aStar.aStar(m)
@@ -22,7 +23,7 @@ class mazeSolver:
                 o.write(str(path))
         a=agent(m,footprints=True)
         m.tracePath({a:path})
-        if self.gui:
+        if self.gui: # if there is a graphical display of the maze
             m.run()
         return path
 
