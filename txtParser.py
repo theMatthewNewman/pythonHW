@@ -6,10 +6,10 @@ from pyamaze import maze,COLOR,agent
 
 class convert:
 
-    def __init__(self, ifile, ofile):
+    def __init__(self, infile, outfile):
         # Variable Initialization and Functions too
-        self.csvfile=ofile
-        self.file = open(ifile, 'r')
+        self.outfile=outfile
+        self.file = open(infile, 'r')
         self.lines = self.file.readlines()
         self.parsedLines = []
         self.cols = 0
@@ -59,7 +59,7 @@ class convert:
 
 #Writing to new csv with proper formatting for loading into pyamaze maze generation
     def write_csv(self):
-        output = open(self.csvfile, "w")
+        output = open(self.outfile, "w")
         output.write("cell,E,W,N,S")
         for j in range(self.cols):
             for i in range(self.rows):
@@ -68,7 +68,7 @@ class convert:
 
     def createMaze(self):
         # maze created based the self.csvfile
-        self.maze.CreateMaze( loadMaze=self.csvfile)
+        self.maze.CreateMaze( loadMaze=self.outfile)
         # displace the maze based the created maze
         self.maze.run()
  
