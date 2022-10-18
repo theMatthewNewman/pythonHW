@@ -2,7 +2,7 @@ from pyamaze import maze, agent
 import aStar
 
 class mazeSolver:
-    def __init__(self, maz, gui, output):
+    def __init__(self, maz, gui=False, output='none'):
         self.gui = gui
         self.maz = maz
         self.output=output
@@ -17,12 +17,13 @@ class mazeSolver:
         m = self.createMaze()
         path = aStar.aStar(m)
         print(path)
-        with open(self.output, "a") as o:
-            o.write(str(path))
+        if self.output != "none":
+            with open(self.output, "a") as o:
+                o.write(str(path))
         a=agent(m,footprints=True)
         m.tracePath({a:path})
         if self.gui:
             m.run()
 
 if __name__ == "__main__":
-    mazeSolver("./maze--2022-10-11--16-50-26.csv",False,"outputFile.txt").solveMaze()
+    mazeSolver("./maze--2022-10-11--16-50-26.csv",True).solveMaze()
