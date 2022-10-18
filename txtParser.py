@@ -10,23 +10,22 @@ class convert:
         # Variable Initialization and Functions too
         self.outfile=outfile
         self.file = open(infile, 'r')
-        self.lines = self.file.readlines()
-        lines = self.parse_func()
+        lines = self.parse_func(self.file.readlines())
         dims = self.get_dimensions(lines)
         self.rows = dims[0]
         self.cols = dims[1]
         # read the input file and get tokenizer for dictionary list
         self.arr = [[[0 for x in range(4)] for y in range(self.cols)] for z in range(self.rows)]
-        self.compute_arr()
+        self.compute_arr(lines)
         self.write_csv()
         # process the dictionary list and sort the dictionary list
         # before write the list into a cvs file (self.csvfile)
     # this function will take an input line and parse into 5 fields
     # field 1: cell., field 2: north distance...
 
-    def parse_func(self):
+    def parse_func(self,lines):
         parsedLines = []
-        for line in self.lines:
+        for line in lines:
             temp = line.replace('"', '').replace(')', '').replace('(', '').replace(',',' ')
             temp = temp.split()
             parsedLines.append(temp)
@@ -45,8 +44,8 @@ class convert:
         return (rows,cols)
 
     # Computing and organizing array
-    def compute_arr(self):
-        for line in self.parsedLines:
+    def compute_arr(self,lines):
+        for line in lines:
             row = int(line[0])-1
             col = int(line[1])-1
             for i in range (2,6):
