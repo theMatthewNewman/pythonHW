@@ -4,15 +4,10 @@ import csv
 from pyamaze import maze,COLOR,agent
  
 
-class Micromouse:
+class convert:
 
     def __init__(self, ifile, ofile):
         # Variable Initialization and Functions too
-        self.N= 2
-        self.S= 3
-        self.E= 0
-        self.W=1
-        self.ifile = ifile
         self.csvfile=ofile
         self.file = open(ifile, 'r')
         self.lines = self.file.readlines()
@@ -65,11 +60,11 @@ class Micromouse:
 #Writing to new csv with proper formatting for loading into pyamaze maze generation
     def write_csv(self):
         output = open(self.csvfile, "w")
-        output.write("  cell  ,E,W,N,S")
+        output.write("cell,E,W,N,S")
         for j in range(self.cols):
             for i in range(self.rows):
                 # Writing data in proper formatting
-                output.write('\n"({}, {})",{},{},{},{}'.format((i+1),(j+1),self.arr[i][j][self.E],self.arr[i][j][self.W],self.arr[i][j][self.N],self.arr[i][j][self.S]))        
+                output.write('\n"({}, {})",{},{},{},{}'.format((i+1),(j+1),self.arr[i][j][0],self.arr[i][j][1],self.arr[i][j][2],self.arr[i][j][3]))        
 
     def createMaze(self):
         # maze created based the self.csvfile
@@ -79,7 +74,5 @@ class Micromouse:
  
 
 if __name__=="__main__":
-
-    a = Micromouse('inputfile3.txt','tmp.csv')
-
+    a = convert('inputfile3.txt','tmp.csv')
     a.createMaze()
