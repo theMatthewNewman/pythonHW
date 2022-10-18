@@ -11,12 +11,10 @@ class convert:
         self.outfile=outfile
         self.file = open(infile, 'r')
         self.lines = self.file.readlines()
-        self.parsedLines = []
-        self.cols = 0
-        self.rows = 0
-        self.parse_func()
-        self.get_dimensions()
-        self.maze = maze(self.rows, self.cols)
+        lines = self.parse_func()
+        dims = self.get_dimensions(lines)
+        self.rows = dims[0]
+        self.cols = dims[1]
         # read the input file and get tokenizer for dictionary list
         self.arr = [[[0 for x in range(4)] for y in range(self.cols)] for z in range(self.rows)]
         self.compute_arr()
@@ -27,22 +25,24 @@ class convert:
     # field 1: cell., field 2: north distance...
 
     def parse_func(self):
-
+        parsedLines = []
         for line in self.lines:
             temp = line.replace('"', '').replace(')', '').replace('(', '').replace(',',' ')
             temp = temp.split()
-            self.parsedLines.append(temp)
-        return
+            parsedLines.append(temp)
+        return parsedLines
 
     # Collecting number of columns and rows
 
-    def get_dimensions(self):
-        for line in self.parsedLines:
-            if int(line[0]) > self.rows:
-                self.rows = int(line[0])
-            if int(line[1]) > self.cols:
-                self.cols = int(line[1])
-        return
+    def get_dimensions(self, lines):
+        rows=0
+        cols=0
+        for line in lines:
+            if int(line[0]) > rows:
+                rows = int(line[0])
+            if int(line[1]) > cols:
+                cols = int(line[1])
+        return (rows,cols)
 
     # Computing and organizing array
     def compute_arr(self):
@@ -68,9 +68,10 @@ class convert:
 
     def createMaze(self):
         # maze created based the self.csvfile
-        self.maze.CreateMaze( loadMaze=self.outfile)
+        m = maze()
+        m.CreateMaze( loadMaze=self.outfile)
         # displace the maze based the created maze
-        self.maze.run()
+        m.run()
  
 
 if __name__=="__main__":
