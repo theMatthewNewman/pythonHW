@@ -889,3 +889,4 @@ class maze:
         '''
         Finally to run the Tkinter Main Loop
         '''
+        self._win.mainloop()
