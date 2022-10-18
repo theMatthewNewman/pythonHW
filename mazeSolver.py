@@ -27,4 +27,4 @@ class mazeSolver:
         return path
 
 if __name__ == "__main__":
-    mazeSolver("./maze--2022-10-11--16-50-26.csv",True).solveMaze()
+    mazeSolver("./tmp.csv",True,"solved.txt").solveMaze()
